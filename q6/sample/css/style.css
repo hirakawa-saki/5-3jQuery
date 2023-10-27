@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.wrapper {
+  width: 300px;
+  margin: 0 auto;
+  padding-top: 300px;
+}
+
+.select-wrapper {
+  width: 170px;
+  text-align: right;
+  display: inline-block;
+}
+
+.select-box {
+  padding: 10px;
+  font-size: 14px;
+  color: #444444;
+  border: none;
+  border-radius: 0;
+  background-color: #acf8f8;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+  cursor: pointer;
+}
+
+.food-list {
+  margin-top: 30px;
+}
+
+.food-list > li {
+  display: inline-block;
+  border-top: 1px #eee solid;
+  padding: 10px;
+  width: 50%;
+  background-color: #d5d5d5;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, .4);
+  text-align: center;
+}

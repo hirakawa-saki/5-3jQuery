@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+h1, h2, h3 {
+  text-align: center;
+  margin: 40px 0;
+  font-weight: bold;
+}
+
+section {
+  padding: 75px 0;
+  border-bottom: 1px solid #333;
+  background: #5185ff;
+}
