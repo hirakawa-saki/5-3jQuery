@@ -6,28 +6,29 @@ $(function () {
 
   $("#search-button").on("click", function () {
     const searchWord = $("#search-input").val();
-
     if (searchWord !== previousSearchWord) {
       pageNumber = 1;
       $(".lists").empty();
+      //サーチワードと前回のワードが異なる場合、ページを１にリセットし、リストをemptyで無にする。
     } else {
       pageNumber++;
+      //同じ検索ワードが使用されている場合はページ数を増やす。
     }
 
-    const apiSettings = {
+    const apiSettings = {//API設定
       "url": `https://ci.nii.ac.jp/books/opensearch/search?title=${searchWord}&format=json&p=${pageNumber}&count=20`,
       "method": "GET",
     };
 
     $.ajax(apiSettings)
       .done(function (response) {
-        const result = response['@graph'];
-        displayResults(result);
-      })
+        const results = response['@graph'];
+        displayResults(results);
+       })//リクエストが成功すると変数リザルトを表示させる。
       .fail(function (err) {
         $(".lists").empty();
         displayError(err);
-      });
+      });//リクエスト失敗すると変数エラーを表示させる。
 
     previousSearchWord = searchWord;
   });
@@ -38,10 +39,10 @@ $(function () {
     $(".lists").empty();
     $("#search-input").val("");
     $(".message").remove();
-  });
+  });//リセットボタンを押すとページ数を１に、検索結果と条件をリセット
 
   function displayResults(results) {
-    if (results && results.length > 0) {
+    if (results && results.length > 0) {//１つ以上のresultsがある時に実行
       $.each(results, function (index, item) {
         const listItem = `<li class="lists-item">
           <div class="list-inner">
@@ -53,12 +54,12 @@ $(function () {
         </li>`;
         $(".lists").prepend(listItem);
       });
-    } else {
+    } else {//検索結果が１つもなかった場合メッセージを表示
       $(".lists").before('<div class="message">検索結果が見つかりませんでした。</div>');
     }
   }
 
-  function displayError(err) {
+  function displayError(err) {//APIがうまく送信されなかったときのエラー
     $(".lists").before('<div class="message">エラーが発生しました。<br>再度更新してください。</div>');
   }
 });
